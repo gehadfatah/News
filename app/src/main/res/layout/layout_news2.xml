@@ -33,11 +33,15 @@
                 android:onClick="@{clickHandler::onTitleClick}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:padding="@dimen/dimen_1"
+
                 app:layout_constraintTop_toTopOf="parent">
                 <ImageView
                     android:id="@+id/image"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp250"
+                    android:src="@drawable/images"
+
                     app:imageUrl="@{article.urlToImage}"
                     android:scaleType="fitXY"
                     app:layout_constraintTop_toTopOf="parent" />

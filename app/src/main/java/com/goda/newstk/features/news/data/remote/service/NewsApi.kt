@@ -11,7 +11,8 @@ interface NewsApi {
     @GET("v2/everything?language=en&sortBy=publishedAt&from=2021-07-01&to=2021-07-01&q=tesla")
     suspend fun getArticlesEverything(
         @QueryMap options: Map<String, String?>,
-        @Query("apiKey") apiKey: String = BuildConfig.api_key
+        @Query("apiKey") apiKey: String
+
     ): APIResponse
 
 }

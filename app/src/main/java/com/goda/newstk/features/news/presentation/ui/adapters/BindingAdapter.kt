@@ -32,10 +32,7 @@ object BindingAdapter {
     @BindingAdapter("imageUrl")
     @JvmStatic
     fun imageUrl(imageView: ImageView, urlToImage: String?) {
-        if (urlToImage.isNullOrBlank())
-            imageView.visibility = View.GONE
-        else
-            Glide.with(imageView.context).load(urlToImage).into(imageView)
+            Glide.with(imageView.context).load(urlToImage).placeholder(R.drawable.images).error(R.drawable.images).into(imageView)
     }
 
     @BindingAdapter("underlinedText")
@@ -58,14 +55,9 @@ object BindingAdapter {
 
         fun onTitleClick(view: View) {
             val transition = TransitionSet().apply {
-                interpolator = FastOutLinearInInterpolator()
-                addTransition(Fade())
-                addTransition(ChangeBounds())
+
             }
-            if (!isDescriptionVisible)
-                TransitionManager.beginDelayedTransition(view.parent as ViewGroup, transition)
-            isDescriptionVisible = !isDescriptionVisible
-            (view.parent as ViewGroup).getChildAt(1).visibility = if (isDescriptionVisible) View.VISIBLE else View.GONE
+
         }
     }
 }

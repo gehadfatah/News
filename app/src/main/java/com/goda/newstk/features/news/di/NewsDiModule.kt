@@ -1,6 +1,7 @@
 package com.goda.newstk.features.news.di
 
 import com.goda.newstk.data.localDb.ArticlesDao
+import com.goda.newstk.di.ApiInfo
 import com.goda.newstk.di.WithInterceptorOkHttpClient
 import com.goda.newstk.features.news.data.remote.service.NewsApi
 import com.goda.newstk.features.news.data.repository.NewsRepo
@@ -18,21 +19,21 @@ import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
 
-
 @InstallIn(SingletonComponent::class)
 @Module
 object NewsDiModule {
-        @Provides
-        @Singleton
-        fun providepaymentRepository(api: NewsApi,  dao: ArticlesDao): NewsRepo = NewsRepo(api, dao)
-  @Provides
+    @Provides
+    @Singleton
+    fun providepaymentRepository(api: NewsApi, dao: ArticlesDao,@ApiInfo  apiKey: String): NewsRepo = NewsRepo(api, dao,apiKey)
+
+    @Provides
     @Singleton
     fun providesPaymentService(@WithInterceptorOkHttpClient retrofit: Retrofit): NewsApi =
         retrofit.create(NewsApi::class.java)
- /*   @Provides
-    @Singleton
-    fun providePaymentRemoteDataSource(service: PaymentService,@CoroutinesIO context: CoroutineContext): PaymentRemoteDataSource {
-        return PaymentRemoteDataSourceImpl(service ,context)
-    }*/
+    /*   @Provides
+       @Singleton
+       fun providePaymentRemoteDataSource(service: PaymentService,@CoroutinesIO context: CoroutineContext): PaymentRemoteDataSource {
+           return PaymentRemoteDataSourceImpl(service ,context)
+       }*/
 
 }

@@ -2,6 +2,7 @@ package com.goda.newstk.features.news.presentation.ui.fragments
 
 import android.os.Bundle
 import android.view.*
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -42,6 +43,13 @@ class NewsFragment : Fragment() {
 
     private fun initListeners() {
         initViewModelListeners()
+        editSearchd.doOnTextChanged{
+            query, start, before, count ->
+            if (count > 3) {
+                viewModel.searchNews(query.toString())
+
+            }
+        }
     }
 
     private fun initViewModelListeners() {

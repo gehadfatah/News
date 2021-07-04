@@ -59,7 +59,11 @@ object NetworkModule {
 
             .build()
     }
-
+    @Provides
+    @ApiInfo
+    fun provideApiKey(): String {
+        return BuildConfig.api_key
+    }
   @Provides
     @Singleton
     @WithInterceptorOkHttpClient
