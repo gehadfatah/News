@@ -1,0 +1,53 @@
+package com.goda.newstk.features.news.presentation.ui.adapters
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
+import com.goda.newstk.data.localDb.Article
+import com.goda.newstk.databinding.LayoutNews2Binding
+
+class ArticlesAdapter:
+    PagedListAdapter<Article, ArticlesAdapter.ArticlesViewHolder>(diffUtilCallback) {
+    companion object {
+        private val diffUtilCallback = object: DiffUtil.ItemCallback<Article>() {
+            override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
+                return oldItem.url == newItem.url
+            }
+
+            override fun areContentsTheSame(oldItem: Article, newItem: Article): Boolean {
+                return oldItem.description == newItem.description &&
+                        oldItem.publishedAt == newItem.publishedAt &&
+                        oldItem.source == newItem.source &&
+                        oldItem.title == newItem.title &&
+                        oldItem.url == newItem.url &&
+                        oldItem.urlToImage == newItem.urlToImage
+            }
+
+        }
+    }
+
+    private lateinit var context: Context
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder {
+        context = parent.context
+        val inflater = LayoutInflater.from(parent.context)
+        val binding: LayoutNews2Binding = LayoutNews2Binding.inflate(inflater, parent, false)
+        return ArticlesViewHolder(binding.root)
+    }
+
+    override fun onBindViewHolder(holder: ArticlesViewHolder, position: Int) {
+        val article = getItem(position)
+
+        holder.binding?.article = article
+        holder.binding?.clickHandler = BindingAdapter.ClickHandler()
+    }
+
+    inner class ArticlesViewHolder internal constructor(view: View):
+        RecyclerView.ViewHolder(view) {
+        val binding: LayoutNews2Binding? = androidx.databinding.DataBindingUtil.bind(view)
+    }
+}

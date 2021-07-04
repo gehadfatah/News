@@ -10,7 +10,9 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
-
+    dataBinding {
+        enabled = true
+    }
     defaultConfig {
         applicationId "com.goda.newstk"
         minSdkVersion 24
@@ -23,8 +25,15 @@ android {
 
     buildTypes {
         release {
+            buildConfigField "String", 'BASE_URL', '"https://newsapi.org"'
+            buildConfigField "String", 'api_key', '"24202e71923042018ed5a9a127010579"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            buildConfigField "String", 'BASE_URL', '"https://newsapi.org"'
+            buildConfigField "String", 'api_key', '"24202e71923042018ed5a9a127010579"'
+
         }
     }
     compileOptions {
@@ -32,7 +41,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     buildFeatures {
-        dataBinding = true
+        //dataBinding = true
         viewBinding = true
 
     }
@@ -42,7 +51,11 @@ android {
 }
 kapt {
     generateStubs = true
+    javacOptions {
+        option("-Adagger.hilt.android.internal.disableAndroidSuperclassValidation=true")
+    }
 }
+
 androidExtensions {
     experimental = true
 }
@@ -90,8 +103,11 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
     implementation 'com.squareup.retrofit2:converter-scalars:2.5.0'
     implementation 'com.google.code.gson:gson:2.8.6'
+    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
+
     /**databinding*/
-    kapt 'com.android.databinding:compiler:3.1.4'
+   // kapt 'com.android.databinding:compiler:3.1.4'
+    kapt "androidx.databinding:databinding-compiler-common:3.6.3"
 
 
 //glide
@@ -177,6 +193,9 @@ dependencies {
     implementation "com.google.dagger:hilt-android:2.35"
     kapt "com.google.dagger:hilt-android-compiler:2.35"
 
-    kapt 'androidx.hilt:hilt-compiler:1.0.0'
+  //  kapt 'androidx.hilt:hilt-compiler:1.0.0'
+
+    //paging
+    implementation "androidx.paging:paging-runtime:2.1.2"
 
 }

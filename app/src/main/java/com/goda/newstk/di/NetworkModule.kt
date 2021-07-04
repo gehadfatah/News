@@ -3,6 +3,7 @@ package com.goda.newstk.di
 import com.goda.newstk.BuildConfig
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -59,19 +60,18 @@ object NetworkModule {
             .build()
     }
 
-
   @Provides
     @Singleton
-    @OtherInterceptorOkHttpClient
+    @WithInterceptorOkHttpClient
 
-    fun provideOtherRetrofit(@OtherInterceptorOkHttpClient okHttpClient: OkHttpClient): Retrofit{
+    fun provideRetrofit(@WithInterceptorOkHttpClient okHttpClient: OkHttpClient): Retrofit{
 
         return Retrofit.Builder()
-           /* .baseUrl(BuildConfig.BASE_URL)*/
+            .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(provideGson()))
 
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-           /* .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())*/
+            .addCallAdapterFactory(CoroutineCallAdapterFactory.invoke())
 
             .addConverterFactory(ScalarsConverterFactory.create())
 
@@ -93,6 +93,3 @@ object NetworkModule {
 @Retention(AnnotationRetention.BINARY)
 annotation class WithInterceptorOkHttpClient
 
-@Qualifier
-@Retention(AnnotationRetention.BINARY)
-annotation class OtherInterceptorOkHttpClient
