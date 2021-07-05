@@ -3,7 +3,7 @@
 
 A news listing app built with Android Jetpack.
 
-Sample app which uses news api to get latest news with search q for Keywords or phrases to search for in the article title and body and pagination for 20 articles and built to illustrate best development practices with Android Jetpack.
+Sample app which uses news api to get latest news with search q for Keywords or phrases to search for in the article title and body when you type >=4 char and pagination for 20 articles and built to illustrate best development practices with Android Jetpack.
 
 Libraries Used
 ---------------
