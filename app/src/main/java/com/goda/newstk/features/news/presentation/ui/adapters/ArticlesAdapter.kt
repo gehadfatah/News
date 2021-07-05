@@ -8,7 +8,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.goda.newstk.data.localDb.Article
-import com.goda.newstk.databinding.LayoutNews2Binding
+import com.goda.newstk.databinding.LayoutNewsBinding
 
 class ArticlesAdapter:
     PagedListAdapter<Article, ArticlesAdapter.ArticlesViewHolder>(diffUtilCallback) {
@@ -35,7 +35,7 @@ class ArticlesAdapter:
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder {
         context = parent.context
         val inflater = LayoutInflater.from(parent.context)
-        val binding: LayoutNews2Binding = LayoutNews2Binding.inflate(inflater, parent, false)
+        val binding: LayoutNewsBinding = LayoutNewsBinding.inflate(inflater, parent, false)
         return ArticlesViewHolder(binding.root)
     }
 
@@ -44,10 +44,11 @@ class ArticlesAdapter:
 
         holder.binding?.article = article
         holder.binding?.clickHandler = BindingAdapter.ClickHandler()
+
     }
 
     inner class ArticlesViewHolder internal constructor(view: View):
         RecyclerView.ViewHolder(view) {
-        val binding: LayoutNews2Binding? = androidx.databinding.DataBindingUtil.bind(view)
+        val binding: LayoutNewsBinding? = androidx.databinding.DataBindingUtil.bind(view)
     }
 }

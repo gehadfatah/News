@@ -25,6 +25,8 @@ data class APIResponse(
             it.title,
             it.description,
             it.url,
+            it.content,
+            it.author,
             it.urlToImage,
             it.publishedAt
         )

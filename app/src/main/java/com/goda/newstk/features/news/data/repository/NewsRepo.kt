@@ -5,24 +5,31 @@ import com.goda.newstk.data.localDb.ArticlesDao
 import com.goda.newstk.di.ApiInfo
 import com.goda.newstk.features.news.data.model.ApiRequest
 import com.goda.newstk.features.news.data.remote.service.NewsApi
-import com.goda.newstk.presentation.common.apiCall
 
 import kotlinx.coroutines.Dispatchers
-import com.goda.newstk.presentation.common.Result
+import com.goda.newstk.data.datamodel.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 class NewsRepo(private val api: NewsApi, private val dao: ArticlesDao,@param:ApiInfo private val apiKey: String) {
     suspend fun loadNews(request: ApiRequest): Result<List<Article>> {
-        return apiCall {
+        return  withContext(Dispatchers.IO) {
+
+        val response = api.getArticlesEverything(request.toMap(),apiKey).await()
+            if (response.isSuccessful) {
+                response.body() ?: throw Exception(response.message())
+            } else {
+                throw Exception(response.message())
+
+            }
             val articles =
-                api.getArticlesEverything(request.toMap(),apiKey).convert()
+                response.body()!!.convert()
 
             if (request.page != 1)
                 cacheArticles(articles)
             else
                 cleanCacheArticles(articles)
-            articles
+            Result.Success(articles)
         }
     }
 

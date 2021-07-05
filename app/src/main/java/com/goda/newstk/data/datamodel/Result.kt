@@ -1,4 +1,4 @@
-package com.goda.newstk.presentation.common
+package com.goda.newstk.data.datamodel
 
 sealed class Result<out T> {
     data class Success<out T>(val value: T): Result<T>()

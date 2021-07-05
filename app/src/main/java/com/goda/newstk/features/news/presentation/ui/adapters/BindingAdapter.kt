@@ -9,12 +9,15 @@ import android.widget.TextView
 import androidx.core.text.HtmlCompat
 import androidx.databinding.BindingAdapter
 import androidx.interpolator.view.animation.FastOutLinearInInterpolator
+import androidx.navigation.Navigation
 import androidx.transition.ChangeBounds
 import androidx.transition.Fade
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
 import com.bumptech.glide.Glide
 import com.goda.newstk.R
+import com.goda.newstk.data.localDb.Article
+import com.goda.newstk.features.news.presentation.ui.fragments.NewsFragmentDirections
 
 object BindingAdapter {
     @BindingAdapter("normalizeDate")
@@ -37,7 +40,7 @@ object BindingAdapter {
 
     @BindingAdapter("underlinedText")
     @JvmStatic
-    fun underlinedText(textView: TextView, text: String?) {
+    public fun underlinedText(textView: TextView, text: String?) {
         if (text == null) return
 
         textView.tag = text
@@ -46,17 +49,13 @@ object BindingAdapter {
     }
 
     class ClickHandler {
-        private var isDescriptionVisible = false
 
-        fun onLinkClick(view: View) {
-            val i = Intent(Intent.ACTION_VIEW, Uri.parse(view.tag.toString()))
-            view.context.startActivity(i)
-        }
 
-        fun onTitleClick(view: View) {
-            val transition = TransitionSet().apply {
 
-            }
+        fun onTitleClick(view: View,article:Article) {
+
+            Navigation.findNavController(view)
+                .navigate(NewsFragmentDirections.actionNewsToDetail(article))
 
         }
     }

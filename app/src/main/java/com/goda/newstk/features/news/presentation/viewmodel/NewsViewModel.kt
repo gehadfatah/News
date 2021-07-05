@@ -17,16 +17,17 @@ import com.goda.newstk.features.news.presentation.ui.adapters.BoundaryCallbackRe
 import dagger.hilt.android.lifecycle.HiltViewModel
 
 import javax.inject.Inject
+
 @HiltViewModel
-class NewsViewModel @Inject constructor(private val newsRepo: NewsRepo): ViewModel() {
+class NewsViewModel @Inject constructor(private val newsRepo: NewsRepo) : ViewModel() {
     private val articlesMaxSize = 80
     private val articlesPageSize = 20
 
     val articles: LiveData<PagedList<Article>>
-    val datePickerVisibility = MutableLiveData(false)
 
     private val callback: ArticleBoundaryCallback
     private val boundaryCallbackRequest: BoundaryCallbackRequest
+    val networkError: LiveData<String>
 
     init {
         val config = Config.Builder().apply {
@@ -38,23 +39,27 @@ class NewsViewModel @Inject constructor(private val newsRepo: NewsRepo): ViewMod
 
         val request =
             ApiRequestEverything(
-                sortBy= SortBy.PublishedAt,
-                language=   Language.English,
-               page =  1
+                sortBy = SortBy.PublishedAt,
+                language = Language.English,
+                page = 1
             )
         boundaryCallbackRequest = BoundaryCallbackRequest(request)
+
         callback = ArticleBoundaryCallback(boundaryCallbackRequest, newsRepo, viewModelScope)
+        networkError = callback.networkErrors
+
+        //save first pagesize in room cache
         articles = LivePagedListBuilder(newsRepo.articlesFactory(), config)
             .setBoundaryCallback(callback)
             .build()
     }
 
 
-
-    fun searchNews(query: String) {
+    fun searchNews(query: String, sortBy: SortBy) {
         val request = ApiRequestEverything(
             language = Language.English,
-            q = query
+            q = query,
+            sortBy = sortBy
         )
 
         boundaryCallbackRequest.request = request
@@ -63,8 +68,6 @@ class NewsViewModel @Inject constructor(private val newsRepo: NewsRepo): ViewMod
 
 
     fun updateNews() {
-        datePickerVisibility.value = boundaryCallbackRequest.request is ApiRequestEverything
-
         boundaryCallbackRequest.request = boundaryCallbackRequest.request.firstPage()
         callback.onZeroItemsLoaded()
     }

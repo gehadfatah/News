@@ -24,12 +24,15 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.goda.newstk.R
+import com.goda.newstk.data.localDb.Article
+import com.goda.newstk.features.news.presentation.ui.fragments.NewsFragmentDirections
 
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.Observable
@@ -43,7 +46,10 @@ fun View.toggleVisibility(visible: Boolean) {
 fun View.toggleVisibilityWithInvisible(visible: Boolean) {
     visibility = if (visible) View.VISIBLE else View.INVISIBLE
 }
-
+fun  View.onLinkClick() {
+    val i = Intent(Intent.ACTION_VIEW, Uri.parse(this.tag.toString()))
+    this.context.startActivity(i)
+}
 fun scrollToView(scrollViewParent: ScrollView, view: View) {
     // Get deepChild Offset
     val childOffset = Point()
@@ -212,7 +218,12 @@ fun View.showSnackbar(message: String, intResourse: Int) {
         snackBar.show()
     }
 }
+fun View.onTitleClick(article: Article) {
 
+    Navigation.findNavController(this)
+        .navigate(NewsFragmentDirections.actionNewsToDetail(article))
+
+}
 fun EditText.searchObservable(): Observable<String> {
     val subject = PublishSubject.create<String>()
     addTextChangedListener(object : TextWatcher {

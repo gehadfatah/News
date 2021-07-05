@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
+            app:expandedTitleTextAppearance="@style/expand"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
 
@@ -64,8 +65,30 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+
                 tools:text="Man shot dead in Minneapolis amid protests over George
 Floyd death - The Guardian" />
+
+            <TextView
+                android:id="@+id/authorTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/grey"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/headline"
+                tools:text="By JULIAN E. BARNES, NICHOLAS FANDOS" />
+
+            <TextView
+                android:id="@+id/sourcetv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/authorTextView"
+                tools:text="Source" />
 
             <TextView
                 android:id="@+id/description"
@@ -75,25 +98,41 @@ Floyd death - The Guardian" />
                 android:paddingVertical="@dimen/row_item_margin_horizontal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/headline"
+                app:layout_constraintTop_toBottomOf="@id/authorTextView"
                 tools:text="Description" />
+
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:lineSpacingExtra="3dp"
+                android:paddingVertical="@dimen/x"
+
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/description"
+                tools:text="The magazine said the president had abused his power and violated the Constitution. Mr. Trump responded by saying he had done more for evangelicals than any other president." />
 
             <TextView
                 android:id="@+id/source"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/newsLinkColor"
+
+                android:textColorLink="@color/newsLinkColor"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/description"
+                app:layout_constraintTop_toBottomOf="@id/content"
                 tools:text="Source" />
 
             <TextView
                 android:id="@+id/publishDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/row_item_margin_horizontal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                app:layout_constraintStart_toEndOf="@id/source"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/source"
                 tools:text="Published Date" />
         </androidx.constraintlayout.widget.ConstraintLayout>

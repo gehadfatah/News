@@ -2,5 +2,6 @@
     <string name="app_name">NewsTk</string>
     <string name="no_results">No results 😓</string>
     <string name="news_link">source link</string>
+    <string name="by">By </string>
 
 </resources>
