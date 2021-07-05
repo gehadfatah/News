@@ -37,7 +37,7 @@ Android Studio IDE setup
 [13]: https://newsapi.org/
 
 ## Architecture
-MarvelHeroes is based on MVVM architecture and a repository pattern.
+news is based on MVVM architecture with search q keyword in search view and pagination for 20 articles.
 
 ## Unit Testing Frameworks
 Unit Tests verify the interactions of viewmodels between repositories and dao & REST api requests.
