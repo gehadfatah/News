@@ -49,7 +49,7 @@ Unit Tests verify the interactions of viewmodels between repositories and dao & 
 
 # Screenshots
 
-<img src="https://github.com/gehadfatah/NewsTk/raw/master/screenshots/news.jpg" alt="alt text" width="300">
+<img src="https://github.com/gehadfatah/NewsTk/raw/main/screenshots/news.jpg" alt="alt text" width="300">
 
-<img src="https://github.com/gehadfatah/NewsTk/raw/master/screenshots/detail.jpg" alt="alt text" width="300">
+<img src="https://github.com/gehadfatah/NewsTk/raw/main/screenshots/detail.jpg" alt="alt text" width="300">
 
