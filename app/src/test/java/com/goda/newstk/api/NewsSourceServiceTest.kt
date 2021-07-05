@@ -33,10 +33,10 @@ class NewsSourceServiceTest : BaseServiceTest() {
     @Throws(IOException::class, InterruptedException::class)
     fun getNewsSource() = runBlocking {
         enqueueResponse("news_source.json")
-       // val response = service.getArticlesEverything().body() ?: return@runBlocking
+        val response = service.getArticlesEverything().body() ?: return@runBlocking
 
         // Dummy request
-      /*  mockWebServer.takeRequest()
+        mockWebServer.takeRequest()
 
         // Check news source
         assertThat(response, notNullValue())
@@ -53,6 +53,6 @@ class NewsSourceServiceTest : BaseServiceTest() {
         assertThat(article1.author, `is`("goda"))
         assertThat(article1.title, `is`("Google Pixel 2"))
         assertThat(article1.description, `is`("Gift me Google Pixel 2 ;)"))
-        assertThat(article1.source.name, `is`("CNN"))*/
+        assertThat(article1.source.name, `is`("CNN"))
     }
 }

@@ -30,7 +30,7 @@ class NewsRepositoryTest : MockitoTest() {
     @Test
     fun `get news articles from web when there is internet`() = runBlocking {
         // GIVEN
-    /*    val fetchedArticles = listOf(
+        val fetchedArticles = listOf(
             NewsArticle(title = "Fetched 1", source = NewsArticle.Source()),
             NewsArticle(title = "Fetched 2", source = NewsArticle.Source())
         )
@@ -49,13 +49,13 @@ class NewsRepositoryTest : MockitoTest() {
         newsRepository.getNewsArticles().assertItems(
             ViewState.loading(),
             ViewState.success(cachedArticles)
-        )*/
+        )
     }
 
     @Test
     fun `get cached news articles when there is no internet`() = runBlocking {
         // GIVEN
-       /* val cachedArticles = listOf(NewsArticleDb(title = "Cached", source = NewsArticleDb.Source()))
+        val cachedArticles = listOf(NewsArticleDb(title = "Cached", source = NewsArticleDb.Source()))
         val error = RuntimeException("Unable to fetch from network")
 
         // WHEN
@@ -66,6 +66,6 @@ class NewsRepositoryTest : MockitoTest() {
         newsRepository.getNewsArticles().assertItems(
             ViewState.loading(),
             ViewState.success(cachedArticles)
-        )*/
+        )
     }
 }
