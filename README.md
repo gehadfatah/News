@@ -3,7 +3,7 @@
 
 A news listing app built with Android Jetpack.
 
-Sample app which uses news api to get latest news and built to illustrate best development practices with Android Jetpack.
+Sample app which uses news api to get latest news with search q for Keywords or phrases to search for in the article title and body and pagination for 20 articles and built to illustrate best development practices with Android Jetpack.
 
 Libraries Used
 ---------------
@@ -37,7 +37,7 @@ Android Studio IDE setup
 [13]: https://newsapi.org/
 
 ## Architecture
-news is based on MVVM architecture with search q keyword in search view and pagination for 20 articles.
+news is based on MVVM with clean architecture.
 
 ## Unit Testing Frameworks
 Unit Tests verify the interactions of viewmodels between repositories and dao & REST api requests.
